@@ -1,0 +1,9 @@
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\bin\Debug\ImageCryptoSandbox.exe.config
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\bin\Debug\ImageCryptoSandbox.exe
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\bin\Debug\ImageCryptoSandbox.pdb
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.csprojResolveAssemblyReference.cache
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.Form1.resources
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.Properties.Resources.resources
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.csproj.GenerateResource.Cache
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.exe
+c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\obj\Debug\ImageCryptoSandbox.pdb
