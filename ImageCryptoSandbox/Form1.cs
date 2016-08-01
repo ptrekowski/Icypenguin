@@ -47,7 +47,10 @@ namespace ImageCryptoSandbox
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
             
-            encrypted = Encrypt.EncryptSymmetric(original);
+            //encrypted = Encrypt.EncryptSymmetric(original);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes("password");
+
+            encrypted = AES_Algorithm.AES_Encrypt(original, passwordBytes);
 
             for (var i = 0; i < 100; i++)
             {
@@ -60,7 +63,10 @@ namespace ImageCryptoSandbox
 
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
-            decrypted = Decrypt.DecryptSymmetric(encrypted);
+            //decrypted = Decrypt.DecryptSymmetric(encrypted);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes("password");
+            decrypted = AES_Algorithm.AES_Decrypt(encrypted, passwordBytes);
+
             for (var i = 0; i < 100; i++)
             {
                 txtBoxDecrypted.Text += decrypted[i].ToString() + " ";
@@ -110,7 +116,10 @@ namespace ImageCryptoSandbox
 
                 using (MemoryStream ms = new MemoryStream(original))
                 {
-                    picBox.Image = ImageHelpers.GetImageFromByteArray(ms.ToArray());
+                    Image img = ImageHelpers.GetImageFromByteArray(ms.ToArray());
+                    picBox.Height = img.Height;
+                    picBox.Width = img.Width;
+                    picBox.Image = img;
                 }
             }
             else
@@ -124,6 +133,13 @@ namespace ImageCryptoSandbox
                 picBox.Image = (Image)imgConverter.ConvertFrom(imageArray);
             }
          
+        }
+
+        private void btnClearnEncryption_Click(object sender, EventArgs e)
+        {
+            txtBoxOriginal.Clear();
+            txtBoxEncrypted.Clear();
+            txtBoxDecrypted.Clear();
         }
 
     }

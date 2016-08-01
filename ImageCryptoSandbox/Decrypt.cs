@@ -34,5 +34,39 @@ namespace ImageCryptoSandbox
                 }
             }
         }
+
+        public static byte[] DecryptAsymmetric(byte[] byteArray)
+        {
+            return new byte[0];
+        }
+
+        public static void DecryptFile()
+        {
+            string fileEncrypted = "C:\\SampleFileEncrypted.DLL";
+            string password = "abcd1234";
+
+            byte[] bytesToBeDecrypted = File.ReadAllBytes(fileEncrypted);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            byte[] bytesDecrypted = AES_Algorithm.AES_Decrypt(bytesToBeDecrypted, passwordBytes);
+
+            string file = "C:\\SampleFile.DLL";
+            File.WriteAllBytes(file, bytesDecrypted);
+        }
+
+        public static string DecryptText(string input, string password)
+        {
+            // Get the bytes of the string
+            byte[] bytesToBeDecrypted = Convert.FromBase64String(input);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            byte[] bytesDecrypted = AES_Algorithm.AES_Decrypt(bytesToBeDecrypted, passwordBytes);
+
+            string result = Encoding.UTF8.GetString(bytesDecrypted);
+
+            return result;
+        }
     }
 }

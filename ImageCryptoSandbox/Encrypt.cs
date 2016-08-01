@@ -48,5 +48,39 @@ namespace ImageCryptoSandbox
             
         }
 
+        public static void EncryptFile()
+        {
+            string file = "C:\\SampleFile.DLL";
+            string password = "abcd1234";
+
+            byte[] bytesToBeEncrypted = File.ReadAllBytes(file);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            byte[] bytesEncrypted = AES_Algorithm.AES_Encrypt(bytesToBeEncrypted, passwordBytes);
+
+            string fileEncrypted = "C:\\SampleFileEncrypted.DLL";
+
+            File.WriteAllBytes(fileEncrypted, bytesEncrypted);
+        }
+
+        public static string EncryptText(string input, string password)
+        {
+            // Get the bytes of the string
+            byte[] bytesToBeEncrypted = Encoding.UTF8.GetBytes(input);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            byte[] bytesEncrypted = AES_Algorithm.AES_Encrypt(bytesToBeEncrypted, passwordBytes);
+
+            string result = Convert.ToBase64String(bytesEncrypted);
+
+            return result;
+        }
+
     }
 }

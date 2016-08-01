@@ -43,9 +43,12 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.btnOpenImage = new System.Windows.Forms.Button();
             this.openImageFile = new System.Windows.Forms.OpenFileDialog();
+            this.btnClearnEncryption = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxEncrypted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxShowEncrypted)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // picBox
@@ -53,6 +56,7 @@
             this.picBox.Location = new System.Drawing.Point(428, 12);
             this.picBox.Name = "picBox";
             this.picBox.Size = new System.Drawing.Size(314, 289);
+            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picBox.TabIndex = 0;
             this.picBox.TabStop = false;
             // 
@@ -81,6 +85,7 @@
             this.picBoxEncrypted.Location = new System.Drawing.Point(428, 307);
             this.picBoxEncrypted.Name = "picBoxEncrypted";
             this.picBoxEncrypted.Size = new System.Drawing.Size(314, 302);
+            this.picBoxEncrypted.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picBoxEncrypted.TabIndex = 3;
             this.picBoxEncrypted.TabStop = false;
             // 
@@ -165,11 +170,31 @@
             this.btnOpenImage.UseVisualStyleBackColor = true;
             this.btnOpenImage.Click += new System.EventHandler(this.btnOpenImage_Click);
             // 
+            // btnClearnEncryption
+            // 
+            this.btnClearnEncryption.Location = new System.Drawing.Point(298, 155);
+            this.btnClearnEncryption.Name = "btnClearnEncryption";
+            this.btnClearnEncryption.Size = new System.Drawing.Size(99, 23);
+            this.btnClearnEncryption.TabIndex = 14;
+            this.btnClearnEncryption.Text = "Clear Encryption";
+            this.btnClearnEncryption.UseVisualStyleBackColor = true;
+            this.btnClearnEncryption.Click += new System.EventHandler(this.btnClearnEncryption_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(39, 129);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1054, 811);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnClearnEncryption);
             this.Controls.Add(this.btnOpenImage);
             this.Controls.Add(this.picBoxShowEncrypted);
             this.Controls.Add(this.btnShowEncryptedImage);
@@ -188,6 +213,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxEncrypted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxShowEncrypted)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +236,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button btnOpenImage;
         private System.Windows.Forms.OpenFileDialog openImageFile;
+        private System.Windows.Forms.Button btnClearnEncryption;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
