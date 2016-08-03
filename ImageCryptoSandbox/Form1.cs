@@ -27,21 +27,10 @@ namespace ImageCryptoSandbox
             Image image = Image.FromFile(@"c:\users\pablo\documents\visual studio 2013\Projects\ImageCryptoSandbox\ImageCryptoSandbox\Images\yoga-final-3.jpg");
             original = ImageHelpers.GetByteArrayFromImage(image);
 
-            picBox.Image = image;
-
             for (var i = 0; i < 100; i++)
             {
                 txtBoxOriginal.Text += original[i].ToString() + " ";
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (MemoryStream ms = new MemoryStream(decrypted))
-            {
-                picBoxEncrypted.Image = Image.FromStream(ms);
-            }
-            
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e)
@@ -51,14 +40,16 @@ namespace ImageCryptoSandbox
             byte[] passwordBytes = Encoding.UTF8.GetBytes("password");
 
             encrypted = AES_Algorithm.AES_Encrypt(original, passwordBytes);
+            txtBoxEncrypted.Text += "Length" + encrypted.Length + "\n";
 
             for (var i = 0; i < 100; i++)
             {
                 txtBoxEncrypted.Text += encrypted[i].ToString() + " ";
             }
 
-            var image = ImageHelpers.byteArrayToImage(encrypted);
-            picBoxShowEncrypted.Image = image;
+            var img = ImageHelpers.byteArrayToImage(encrypted);
+            createNewImageForm(img);
+            picBoxShowEncrypted.Image = img;
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
@@ -67,10 +58,15 @@ namespace ImageCryptoSandbox
             byte[] passwordBytes = Encoding.UTF8.GetBytes("password");
             decrypted = AES_Algorithm.AES_Decrypt(encrypted, passwordBytes);
 
+            txtBoxDecrypted.Text += "Length" + decrypted.Length + "\n\r";
+
             for (var i = 0; i < 100; i++)
             {
                 txtBoxDecrypted.Text += decrypted[i].ToString() + " ";
             }
+
+            Image img = ImageHelpers.GetImageFromByteArray(decrypted);
+            createNewImageForm(img);
             
         }
 
@@ -108,18 +104,13 @@ namespace ImageCryptoSandbox
             {
                 encrypted = FileHelper.ReadCipherTextFromFile(openImageFile.FileName);
                 original = Decrypt.DecryptSymmetric(encrypted);
-                for (var i = 0; i < 100; i++)
-                {
-                    txtBoxOriginal.Text += original[i] + " ";
-                }
-
 
                 using (MemoryStream ms = new MemoryStream(original))
                 {
-                    Image img = ImageHelpers.GetImageFromByteArray(ms.ToArray());
-                    picBox.Height = img.Height;
-                    picBox.Width = img.Width;
-                    picBox.Image = img;
+                    //Image img = ImageHelpers.GetImageFromByteArray(ms.ToArray());
+                    //picBox.Height = img.Height;
+                    //picBox.Width = img.Width;
+                    //picBox.Image = img;
                 }
             }
             else
@@ -127,10 +118,15 @@ namespace ImageCryptoSandbox
                 var imageArray = FileHelper.ReadAllBytesFromFile(openImageFile.FileName);
 
                 original = imageArray;
+                txtBoxOriginal.Text += "Length" + original.Length + "\n";
 
-                ImageConverter imgConverter = new ImageConverter();
+                for (var i = 0; i < 100; i++)
+                {
+                    txtBoxOriginal.Text += original[i] + " ";
+                }
 
-                picBox.Image = (Image)imgConverter.ConvertFrom(imageArray);
+                Image img = ImageHelpers.GetImageFromByteArray(imageArray);
+                createNewImageForm(img);
             }
          
         }
@@ -142,5 +138,35 @@ namespace ImageCryptoSandbox
             txtBoxDecrypted.Clear();
         }
 
-    }
+        private void createNewImageForm(Image img)
+        {
+            Form picForm = new Form();
+
+            PictureBox picBox = new PictureBox();
+            //picBox.Dock = DockStyle.Fill;
+            picBox.Image = img;
+            picBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            //picBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            picForm.Height = img.Height;
+            picForm.Width = img.Width;
+            picForm.Controls.Add(picBox);
+            picForm.Show();
+        }
+
+        private void btnTestLoss_Click(object sender, EventArgs e)
+        {
+            byte[] passwordBytes = Encoding.UTF8.GetBytes("password");
+            byte[] encryptedArray = AES_Algorithm.AES_Encrypt(original, passwordBytes);
+            byte[] decryptedArray = AES_Algorithm.AES_Decrypt(encryptedArray, passwordBytes);
+
+            for (var i = 0; i < Int32.Parse(txtBoxTestIterations.Text); i++)
+            {
+                encryptedArray = AES_Algorithm.AES_Encrypt(original, passwordBytes);
+                decryptedArray = AES_Algorithm.AES_Decrypt(encryptedArray, passwordBytes);
+            }
+
+            createNewImageForm(ImageHelpers.GetImageFromByteArray(decryptedArray));
+        }
+
+    }   
 }
